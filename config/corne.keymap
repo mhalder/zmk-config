@@ -39,7 +39,7 @@
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
         // │  \  │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │  =  │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-        //                   │ ESC │ SPC │ TAB │   │ ENT │BSPC │ DEL │
+        //                   │ ESC │BSPC │ TAB │   │ ENT │ SPC │ DEL │
         //                   │ NUM │ NAV │ SYM │   │ FUN │MOUSE│     │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         base_layer {
@@ -47,7 +47,7 @@
    &kp GRAVE  &kp Q       &kp W       &kp E        &kp R        &kp T          &kp Y      &kp U        &kp I        &kp O       &kp P          &kp MINUS
    &kp TAB    &hm LGUI A  &hm LALT S  &hm LCTRL D  &hm LSHFT F  &kp G          &kp H      &hm RSHFT J  &hm RCTRL K  &hm RALT L  &hm RGUI SEMI  &kp SQT
    &kp BSLH   &kp Z       &kp X       &kp C        &kp V        &kp B          &kp N      &kp M        &kp COMMA    &kp DOT     &kp FSLH       &kp EQUAL
-                                      &lt NUM ESC  &lt NAV SPACE &lt SYM TAB   &lt FUN RET &lt MOUSE BSPC &kp DEL
+                                      &lt NUM ESC  &lt NAV BSPC &lt SYM TAB   &lt FUN RET &lt MOUSE SPACE &kp DEL
             >;
         };
 
@@ -59,14 +59,14 @@
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
         // │     │     │     │     │     │     │   │HOME │PGDN │PGUP │ END │ INS │     │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-        //                   │     │     │     │   │ ENT │BSPC │ DEL │
+        //                   │     │     │     │   │ ENT │ SPC │ DEL │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         nav_layer {
             bindings = <
    &trans  &trans    &trans    &trans     &trans     &trans       &kp K_REDO  &kp K_PASTE  &kp K_COPY  &kp K_CUT  &kp K_UNDO  &trans
    &trans  &kp LGUI  &kp LALT  &kp LCTRL  &kp LSHFT  &trans       &kp LEFT    &kp DOWN     &kp UP      &kp RIGHT  &kp CAPS    &trans
    &trans  &trans    &trans    &trans     &trans     &trans       &kp HOME    &kp PG_DN    &kp PG_UP   &kp END    &kp INS     &trans
-                               &trans     &trans     &trans       &kp RET     &kp BSPC     &kp DEL
+                               &trans     &trans     &trans       &kp RET     &kp SPACE    &kp DEL
             >;
         };
 
@@ -116,14 +116,14 @@
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
         // │     │ F10 │ F1  │ F2  │ F3  │PAUSE│   │     │     │     │     │RESET│BOOTL│
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-        //                   │ APP │ SPC │ TAB │   │     │     │     │
+        //                   │ APP │BSPC │ TAB │   │     │     │     │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         fun_layer {
             bindings = <
    &trans  &kp F12  &kp F7  &kp F8   &kp F9   &kp PSCRN          &bt BT_CLR    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3   &bt BT_SEL 4
    &trans  &kp F11  &kp F4  &kp F5   &kp F6   &kp SLCK           &kp C_VOL_DN  &kp C_VOL_UP  &kp C_MUTE    &kp C_PREV    &kp C_NEXT     &kp C_PP
    &trans  &kp F10  &kp F1  &kp F2   &kp F3   &kp PAUSE_BREAK    &trans        &trans        &trans        &trans        &sys_reset     &bootloader
-                            &kp K_APP &kp SPACE &kp TAB          &trans        &trans        &trans
+                            &kp K_APP &kp BSPC &kp TAB          &trans        &trans        &trans
             >;
         };
 
