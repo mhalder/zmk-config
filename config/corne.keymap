@@ -7,11 +7,13 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/mouse.h>
 
-#define BASE 0
-#define NAV  1
-#define NUM  2
-#define FUN  3
+#define BASE  0
+#define MOUSE 1
+#define NAV   2
+#define NUM   3
+#define FUN   4
 
 / {
     macros {
@@ -48,50 +50,6 @@
             require-prior-idle-ms = <125>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
-        };
-
-        // Tap-dance: single tap = punct, double tap = shifted punct
-        tdlb: tap_dance_lbkt {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LBKT>, <&kp LBRC>;
-        };
-        tdrb: tap_dance_rbkt {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp RBKT>, <&kp RBRC>;
-        };
-        tdsc: tap_dance_semi {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp SEMI>, <&kp COLON>;
-        };
-        tdeq: tap_dance_equal {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp EQUAL>, <&kp PLUS>;
-        };
-        tdgr: tap_dance_grave {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp GRAVE>, <&kp TILDE>;
-        };
-        tdbs: tap_dance_bslh {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp BSLH>, <&kp PIPE>;
-        };
-        tdmn: tap_dance_minus {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp MINUS>, <&kp UNDER>;
         };
 
         // Tap-dance for numbers: tap=num, double=symbol, triple=i3
@@ -169,14 +127,33 @@
         // │CAPS │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │  \  │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
         //                   │ ESC │BSPC │ TAB │   │ ENT │ SPC │ DEL │
-        //                   │ NAV │/SFT │     │   │ NUM │/SFT │ FUN │
+        //                   │MOUSE│/SFT │ NAV │   │ NUM │/SFT │ FUN │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         base_layer {
             bindings = <
    &kp GRAVE  &kp Q  &kp W       &kp E       &kp R        &kp T          &kp Y      &kp U        &kp I       &kp O       &kp P     &kp MINUS
    &kp SQT    &kp A  &hm LALT S  &hm LGUI D  &hm LCTRL F  &kp G          &kp H      &hm RCTRL J  &hm RGUI K  &hm RALT L  &kp SEMI  &kp EQUAL
    &kp CAPS   &kp Z  &kp X       &kp C       &kp V        &kp B          &kp N      &kp M        &kp COMMA   &kp DOT     &kp FSLH  &kp BSLH
-                                 &lt NAV ESC &ts LSHFT BSPC &kp TAB      &lt NUM RET &ts RSHFT SPACE &lt FUN DEL
+                                 &lt MOUSE ESC &ts LSHFT BSPC &lt NAV TAB   &lt NUM RET &ts RSHFT SPACE &lt FUN DEL
+            >;
+        };
+
+        // MOUSE: Mouse movement, scrolling, and clicks
+        // ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
+        // │     │     │     │     │     │     │   │     │     │     │     │     │     │
+        // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+        // │     │     │ ALT │ GUI │CTRL │     │   │ M_L │ M_D │ M_U │ M_R │     │     │
+        // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+        // │     │     │     │     │     │     │   │SCL_L│SCL_D│SCL_U│SCL_R│     │     │
+        // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
+        //                   │     │     │     │   │LCLK │RCLK │MCLK │
+        //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
+        mouse_layer {
+            bindings = <
+   &trans  &trans  &trans    &trans    &trans     &trans       &trans          &trans          &trans          &trans           &trans           &trans
+   &trans  &trans  &kp LALT  &kp LGUI  &kp LCTRL  &trans       &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_UP    &mmv MOVE_RIGHT  &trans           &trans
+   &trans  &trans  &trans    &trans    &trans     &trans       &msc SCRL_LEFT  &msc SCRL_DOWN  &msc SCRL_UP    &msc SCRL_RIGHT  &trans           &trans
+                             &trans    &trans     &trans       &mkp LCLK       &mkp RCLK       &mkp MCLK
             >;
         };
 
@@ -201,20 +178,20 @@
 
         // NUM: Numpad with tap-dance (tap=num, double=symbol, triple=i3)
         // ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-        // │     │ [/{ │ 7/& │ 8/* │ 9/( │ ]/} │   │     │     │     │     │     │     │
+        // │     │     │ 7/& │ 8/* │ 9/( │  [  │   │     │     │     │     │     │     │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │ ;/: │ 4/$ │ 5/% │ 6/^ │ =/+ │   │     │CTRL │ GUI │ ALT │     │     │
+        // │     │     │ 4/$ │ 5/% │ 6/^ │  ]  │   │     │CTRL │ GUI │ ALT │     │     │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │ `/~ │ 1/! │ 2/@ │ 3/# │ \/| │   │     │     │     │     │     │     │
+        // │     │     │ 1/! │ 2/@ │ 3/# │  {  │   │     │     │     │     │     │     │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-        //                   │  .  │ 0/) │ -/_ │   │     │     │     │
+        //                   │     │ 0/) │  }  │   │     │     │     │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         num_layer {
             bindings = <
-   &trans  &tdlb  &td7  &td8  &td9  &tdrb      &trans  &trans     &trans    &trans    &trans  &trans
-   &trans  &tdsc  &td4  &td5  &td6  &tdeq      &trans  &kp RCTRL  &kp RGUI  &kp RALT  &trans  &trans
-   &trans  &tdgr  &td1  &td2  &td3  &tdbs      &trans  &trans     &trans    &trans    &trans  &trans
-                        &kp DOT  &td0  &tdmn   &trans  &trans     &trans
+   &trans  &trans  &td7  &td8  &td9  &kp LBKT   &trans  &trans     &trans    &trans    &trans  &trans
+   &trans  &trans  &td4  &td5  &td6  &kp RBKT   &trans  &kp RCTRL  &kp RGUI  &kp RALT  &trans  &trans
+   &trans  &trans  &td1  &td2  &td3  &kp LBRC   &trans  &trans     &trans    &trans    &trans  &trans
+                        &trans   &td0  &kp RBRC &trans  &trans     &trans
             >;
         };
 
@@ -224,7 +201,7 @@
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
         // │     │ F11 │ F4  │ F5  │ F6  │SLCK │   │VOLDN│VOLUP│MUTE │PREV │NEXT │PLAY │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │ F10 │ F1  │ F2  │ F3  │PAUSE│   │     │     │     │     │RESET│BOOTL│
+        // │BOOTL│ F10 │ F1  │ F2  │ F3  │PAUSE│   │     │     │     │     │RESET│BOOTL│
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
         //                   │ APP │BSPC │ TAB │   │     │     │     │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
@@ -232,7 +209,7 @@
             bindings = <
    &trans  &kp F12  &kp F7  &kp F8    &kp F9  &kp PSCRN          &bt BT_CLR    &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
    &trans  &kp F11  &kp F4  &kp F5    &kp F6  &kp SLCK           &kp C_VOL_DN  &kp C_VOL_UP  &kp C_MUTE    &kp C_PREV    &kp C_NEXT    &kp C_PP
-   &trans  &kp F10  &kp F1  &kp F2    &kp F3  &kp PAUSE_BREAK    &trans        &trans        &trans        &trans        &sys_reset    &bootloader
+   &bootloader  &kp F10  &kp F1  &kp F2    &kp F3  &kp PAUSE_BREAK    &trans        &trans        &trans        &trans        &sys_reset    &bootloader
                             &kp K_APP &kp BSPC &kp TAB           &trans        &trans        &trans
             >;
         };
