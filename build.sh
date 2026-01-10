@@ -5,21 +5,41 @@
 set -e
 cd "$(dirname "$0")"
 
-BUILD_DIR="/home/halderm/projects/tools/zmk/zmk-build"
+BUILD_DIR="$(pwd)/build"
 CONFIG_DIR="$(pwd)/config"
 BOARD="nice_nano/nrf52840"
+ZMK_CONTAINER="docker.io/zmkfirmware/zmk-dev-arm:stable"
+
+init_workspace() {
+    mkdir -p "${BUILD_DIR}"
+    if [ ! -d "${BUILD_DIR}/.west" ]; then
+        echo "Initializing west workspace (first run, this may take a while)..."
+        podman run --rm \
+            -v "${BUILD_DIR}:/workspace:Z" \
+            -w /workspace \
+            "${ZMK_CONTAINER}" \
+            bash -c "west init -m https://github.com/zmkfirmware/zmk.git --mr main --mf app/west.yml && west update"
+        # west names the manifest dir zmk.git from the URL; rename to zmk
+        if [ -d "${BUILD_DIR}/zmk.git" ]; then
+            mv "${BUILD_DIR}/zmk.git" "${BUILD_DIR}/zmk"
+            sed -i 's/zmk\.git/zmk/' "${BUILD_DIR}/.west/config"
+        fi
+    fi
+}
 
 build_side() {
     local side=$1
     local shield="corne_${side} nice_view_adapter nice_view"
+
+    init_workspace
 
     echo "Building ${side}..."
     podman run --rm \
         -v "${BUILD_DIR}:/workspace:Z" \
         -v "${CONFIG_DIR}:/config:ro,Z" \
         -w /workspace \
-        docker.io/zmkfirmware/zmk-dev-arm:stable \
-        bash -c "west zephyr-export 2>/dev/null; west build -s zmk.git/app -b ${BOARD} -d build/${side} -- -DSHIELD=\"${shield}\" -DZMK_CONFIG=/config"
+        "${ZMK_CONTAINER}" \
+        bash -c "west zephyr-export 2>/dev/null; west build -s zmk/app -b ${BOARD} -d build/${side} -- -DSHIELD=\"${shield}\" -DZMK_CONFIG=/config"
 
     cp "${BUILD_DIR}/build/${side}/zephyr/zmk.uf2" "./corne_${side}.uf2"
     echo "Built: corne_${side}.uf2"
