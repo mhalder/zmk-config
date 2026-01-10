@@ -11,10 +11,23 @@
 #define BASE 0
 #define NAV  1
 #define NUM  2
-#define SYM  3
-#define FUN  4
+#define FUN  3
 
 / {
+    macros {
+        // i3 workspace switching: SHIFT+GUI+number
+        i3_1: i3_ws_1 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N1))>; };
+        i3_2: i3_ws_2 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N2))>; };
+        i3_3: i3_ws_3 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N3))>; };
+        i3_4: i3_ws_4 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N4))>; };
+        i3_5: i3_ws_5 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N5))>; };
+        i3_6: i3_ws_6 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N6))>; };
+        i3_7: i3_ws_7 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N7))>; };
+        i3_8: i3_ws_8 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N8))>; };
+        i3_9: i3_ws_9 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N9))>; };
+        i3_0: i3_ws_0 { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp LS(LG(N0))>; };
+    };
+
     behaviors {
         // Home-row mods with balanced flavor
         hm: homerow_mods {
@@ -36,6 +49,112 @@
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
+
+        // Tap-dance: single tap = punct, double tap = shifted punct
+        tdlb: tap_dance_lbkt {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LBKT>, <&kp LBRC>;
+        };
+        tdrb: tap_dance_rbkt {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp RBKT>, <&kp RBRC>;
+        };
+        tdsc: tap_dance_semi {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp SEMI>, <&kp COLON>;
+        };
+        tdeq: tap_dance_equal {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp EQUAL>, <&kp PLUS>;
+        };
+        tdgr: tap_dance_grave {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp GRAVE>, <&kp TILDE>;
+        };
+        tdbs: tap_dance_bslh {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp BSLH>, <&kp PIPE>;
+        };
+        tdmn: tap_dance_minus {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp MINUS>, <&kp UNDER>;
+        };
+
+        // Tap-dance for numbers: tap=num, double=symbol, triple=i3
+        td1: tap_dance_1 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N1>, <&kp EXCL>, <&i3_1>;
+        };
+        td2: tap_dance_2 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N2>, <&kp AT>, <&i3_2>;
+        };
+        td3: tap_dance_3 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N3>, <&kp HASH>, <&i3_3>;
+        };
+        td4: tap_dance_4 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N4>, <&kp DLLR>, <&i3_4>;
+        };
+        td5: tap_dance_5 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N5>, <&kp PRCNT>, <&i3_5>;
+        };
+        td6: tap_dance_6 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N6>, <&kp CARET>, <&i3_6>;
+        };
+        td7: tap_dance_7 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N7>, <&kp AMPS>, <&i3_7>;
+        };
+        td8: tap_dance_8 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N8>, <&kp ASTRK>, <&i3_8>;
+        };
+        td9: tap_dance_9 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N9>, <&kp LPAR>, <&i3_9>;
+        };
+        td0: tap_dance_0 {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp N0>, <&kp RPAR>, <&i3_0>;
+        };
     };
 
     keymap {
@@ -50,14 +169,14 @@
         // │CAPS │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │  \  │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
         //                   │ ESC │BSPC │ TAB │   │ ENT │ SPC │ DEL │
-        //                   │ NAV │/SFT │ SYM │   │ NUM │/SFT │ FUN │
+        //                   │ NAV │/SFT │     │   │ NUM │/SFT │ FUN │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         base_layer {
             bindings = <
    &kp GRAVE  &kp Q  &kp W       &kp E       &kp R        &kp T          &kp Y      &kp U        &kp I       &kp O       &kp P     &kp MINUS
    &kp SQT    &kp A  &hm LALT S  &hm LGUI D  &hm LCTRL F  &kp G          &kp H      &hm RCTRL J  &hm RGUI K  &hm RALT L  &kp SEMI  &kp EQUAL
    &kp CAPS   &kp Z  &kp X       &kp C       &kp V        &kp B          &kp N      &kp M        &kp COMMA   &kp DOT     &kp FSLH  &kp BSLH
-                                 &lt NAV ESC &ts LSHFT BSPC &lt SYM TAB  &lt NUM RET &ts RSHFT SPACE &lt FUN DEL
+                                 &lt NAV ESC &ts LSHFT BSPC &kp TAB      &lt NUM RET &ts RSHFT SPACE &lt FUN DEL
             >;
         };
 
@@ -80,41 +199,22 @@
             >;
         };
 
-        // NUM: Numpad-style numbers on left
+        // NUM: Numpad with tap-dance (tap=num, double=symbol, triple=i3)
         // ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-        // │     │  [  │  7  │  8  │  9  │  ]  │   │     │     │     │     │     │     │
+        // │     │ [/{ │ 7/& │ 8/* │ 9/( │ ]/} │   │     │     │     │     │     │     │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │  ;  │  4  │  5  │  6  │  =  │   │     │CTRL │ GUI │ ALT │     │     │
+        // │     │ ;/: │ 4/$ │ 5/% │ 6/^ │ =/+ │   │     │CTRL │ GUI │ ALT │     │     │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │  `  │  1  │  2  │  3  │  \  │   │     │     │     │     │     │     │
+        // │     │ `/~ │ 1/! │ 2/@ │ 3/# │ \/| │   │     │     │     │     │     │     │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-        //                   │  .  │  0  │  -  │   │     │     │     │
+        //                   │  .  │ 0/) │ -/_ │   │     │     │     │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         num_layer {
             bindings = <
-   &trans  &kp LBKT   &kp N7  &kp N8  &kp N9  &kp RBKT       &trans  &trans     &trans    &trans    &trans  &trans
-   &trans  &kp SEMI   &kp N4  &kp N5  &kp N6  &kp EQUAL      &trans  &kp RCTRL  &kp RGUI  &kp RALT  &trans  &trans
-   &trans  &kp GRAVE  &kp N1  &kp N2  &kp N3  &kp BSLH       &trans  &trans     &trans    &trans    &trans  &trans
-                              &kp DOT &kp N0  &kp MINUS      &trans  &trans     &trans
-            >;
-        };
-
-        // SYM: Programming symbols
-        // ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-        // │     │  {  │  &  │  *  │  (  │  }  │   │     │     │     │     │     │     │
-        // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │  :  │  $  │  %  │  ^  │  +  │   │     │CTRL │ GUI │ ALT │     │     │
-        // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │  ~  │  !  │  @  │  #  │  |  │   │     │     │     │     │     │     │
-        // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-        //                   │  (  │  )  │     │   │     │     │     │
-        //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
-        sym_layer {
-            bindings = <
-   &trans  &kp LBRC   &kp AMPS   &kp ASTRK  &kp LPAR   &kp RBRC       &trans  &trans     &trans    &trans    &trans  &trans
-   &trans  &kp COLON  &kp DLLR   &kp PRCNT  &kp CARET  &kp PLUS       &trans  &kp RCTRL  &kp RGUI  &kp RALT  &trans  &trans
-   &trans  &kp TILDE  &kp EXCL   &kp AT     &kp HASH   &kp PIPE       &trans  &trans     &trans    &trans    &trans  &trans
-                                 &kp LPAR   &kp RPAR   &trans         &trans  &trans     &trans
+   &trans  &tdlb  &td7  &td8  &td9  &tdrb      &trans  &trans     &trans    &trans    &trans  &trans
+   &trans  &tdsc  &td4  &td5  &td6  &tdeq      &trans  &kp RCTRL  &kp RGUI  &kp RALT  &trans  &trans
+   &trans  &tdgr  &td1  &td2  &td3  &tdbs      &trans  &trans     &trans    &trans    &trans  &trans
+                        &kp DOT  &td0  &tdmn   &trans  &trans     &trans
             >;
         };
 
