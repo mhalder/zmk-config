@@ -1,0 +1,25 @@
+config = {user: 'admin', port: 8080}
+let items = [1, 2, 3]; items[0] = 'first';
+price = $49.99; discount = 15%; total = price - (price * 0.15)
+email@test.com #hashtag @mention $variable %format
+path/to/file.txt C:\Users\name\docs back\slash
+func(arg1, arg2); return x + y - z * 2;
+arr[0] = {key: 'value'}; obj.name = "test";
+x == y; a != b; c >= d; e <= f;
+`template ${var}` 'single' "double"
+1! 2@ 3# 4$ 5% 6^ 7& 8* 9( 0)
+The Quick Brown Fox Jumps Over The Lazy Dog.
+THE QUICK BROWN FOX; jumps, over. the/lazy\dog
+127.0.0.1:3000 https://example.com/api?id=42&name=test
+git commit -m 'fix: resolve #123 bug'
+if (x > 0 && y < 10) { return true; }
+array.map((item) => item * 2);
+export const API_KEY = 'abc-123_xyz';
+user@domain.com; admin#root; $HOME/.config
+[brackets] {braces} (parens) 'quotes' "doubles"
+a; b, c. d/ e\ f` g' h- i= j[ k] l{ m} n( o)
+100% complete! @user said "it's done" & ready.
+1234567890 0987654321 1470258369 7418529630
+!@#$%^&*() !!! @@@ ### $$$ %%% ^^^ &&& *** ((( )))
+[] {} () [[]] {{}} (()) [{()}] {[()]}
+`code` 'string' key=value; path/file name-space item,list end.
