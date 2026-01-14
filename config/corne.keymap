@@ -17,6 +17,15 @@
 
 / {
 
+    macros {
+        // Tmux prefix (Ctrl+B)
+        tmux: tmux_prefix {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(B)>;
+        };
+    };
+
     behaviors {
         // Home-row mods with balanced flavor
         hm: homerow_mods {
@@ -108,7 +117,7 @@
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
         // │  '  │  A  │ S/A │ D/G │ F/C │  G  │   │  H  │ J/C │ K/G │ L/A │  ;  │  =  │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │S-CTL│  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │  \  │
+        // │TMUX │  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │  \  │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
         //                   │ ESC │BSPC │ TAB │   │ ENT │ SPC │S+GUI│
         //                   │MOUSE│/SFT │ NAV │   │ NUM │/SFT │ FUN │
@@ -117,7 +126,7 @@
             bindings = <
    &kp GRAVE  &kp Q  &kp W       &kp E       &kp R        &kp T          &kp Y      &kp U        &kp I       &kp O       &kp P     &kp MINUS
    &kp SQT    &kp A  &hm LALT S  &hm LGUI D  &hm LCTRL F  &kp G          &kp H      &hm RCTRL J  &hm RGUI K  &hm RALT L  &kp SEMI  &kp EQUAL
-   &sk LCTRL  &kp Z  &kp X       &kp C       &kp V        &kp B          &kp N      &kp M        &kp COMMA   &kp DOT     &kp FSLH  &kp BSLH
+   &tmux      &kp Z  &kp X       &kp C       &kp V        &kp B          &kp N      &kp M        &kp COMMA   &kp DOT     &kp FSLH  &kp BSLH
                                  &lt MOUSE ESC &ts LSHFT BSPC &lt NAV TAB   &lt NUM RET &ts RSHFT SPACE &fun_sk FUN LS(LGUI)
             >;
         };
