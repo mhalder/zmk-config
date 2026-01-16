@@ -1,6 +1,6 @@
 #!/bin/bash
 # Local ZMK build script using podman
-# Usage: ./build.sh [left|right|both|flash-left|flash-right|flash]
+# Usage: ./build.sh [left|right|both|update|flash-left|flash-right|flash]
 
 set -e
 cd "$(dirname "$0")"
@@ -68,6 +68,22 @@ find_bootloader() {
     return 1
 }
 
+update_workspace() {
+    if [ ! -d "${BUILD_DIR}/.west" ]; then
+        echo "Workspace not initialized. Run build first."
+        exit 1
+    fi
+
+    echo "Updating ZMK and dependencies..."
+    podman run --rm \
+        -v "${BUILD_DIR}:/workspace:Z" \
+        -w /workspace \
+        "${ZMK_CONTAINER}" \
+        west update
+
+    echo "Update complete. Rebuild with: $0 both"
+}
+
 flash_side() {
     local side=$1
     local uf2="./corne_${side}.uf2"
@@ -105,8 +121,9 @@ case "${1:-both}" in
     left)        build_side left ;;
     right)       build_side right ;;
     both)        build_side left; build_side right ;;
+    update)      update_workspace ;;
     flash-left)  flash_side left ;;
     flash-right) flash_side right ;;
     flash)       flash_side left; echo ""; flash_side right ;;
-    *)           echo "Usage: $0 [left|right|both|flash-left|flash-right|flash]"; exit 1 ;;
+    *)           echo "Usage: $0 [left|right|both|update|flash-left|flash-right|flash]"; exit 1 ;;
 esac
