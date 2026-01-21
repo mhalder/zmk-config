@@ -176,20 +176,20 @@
 
         // NUM: Numpad with tap-dance (tap=num, double=symbol)
         // ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-        // │     │ 7/& │ 8/* │  9  │  (  │  )  │   │     │     │     │     │     │     │
+        // │ ENT │ 7/& │ 8/* │  9  │  (  │  )  │   │     │     │     │     │     │     │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-        // │     │ 4/$ │ 5/% │ 6/^ │  [  │  ]  │   │     │CTRL │ GUI │ ALT │     │     │
+        // │ SPC │ 4/$ │ 5/% │ 6/^ │  [  │  ]  │   │     │CTRL │ GUI │ ALT │     │     │
         // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
         // │  0  │ 1/! │ 2/@ │ 3/# │  {  │  }  │   │     │     │     │     │     │     │
         // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-        //                   │     │SHFT │     │   │     │     │     │
+        //                   │ ESC │BSPC │ TAB │   │     │     │     │
         //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
         num_layer {
             bindings = <
-   &trans   &td7  &td8  &kp N9  &kp LPAR  &kp RPAR   &trans  &trans     &trans    &trans    &trans  &trans
-   &trans   &td4  &td5  &td6    &kp LBKT  &kp RBKT   &trans  &kp RCTRL  &kp RGUI  &kp RALT  &trans  &trans
-   &kp N0   &td1  &td2  &td3    &kp LBRC  &kp RBRC   &trans  &trans     &trans    &trans    &trans  &trans
-                        &trans   &kp LSHFT  &trans     &trans  &trans     &trans
+   &kp RET    &td7  &td8  &kp N9  &kp LPAR  &kp RPAR   &trans  &trans     &trans    &trans    &trans  &trans
+   &kp SPACE  &td4  &td5  &td6    &kp LBKT  &kp RBKT   &trans  &kp RCTRL  &kp RGUI  &kp RALT  &trans  &trans
+   &kp N0     &td1  &td2  &td3    &kp LBRC  &kp RBRC   &trans  &trans     &trans    &trans    &trans  &trans
+                          &kp ESC  &kp BSPC  &kp TAB   &trans  &trans     &trans
             >;
         };
 
