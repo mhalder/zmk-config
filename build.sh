@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 
 BUILD_DIR="$(pwd)/build"
 CONFIG_DIR="$(pwd)/config"
-BOARD="nice_nano/nrf52840"
+BOARD="nice_nano/nrf52840/zmk"
 ZMK_CONTAINER="docker.io/zmkfirmware/zmk-dev-arm:stable"
 
 init_workspace() {
@@ -79,7 +79,7 @@ update_workspace() {
         -v "${BUILD_DIR}:/workspace:Z" \
         -w /workspace \
         "${ZMK_CONTAINER}" \
-        west update
+        bash -c "git -C zmk pull origin main && west update"
 
     echo "Update complete. Rebuild with: $0 both"
 }
