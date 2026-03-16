@@ -52,12 +52,45 @@
             bindings = <&kp>, <&kp>;
         };
 
+        // Custom layer-taps: hold-preferred + hold-while-undecided
+        // ensures the layer activates immediately, fixing race condition
+        // with fast keypresses after layer activation
+        lt_mouse: layer_tap_mouse {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
+            bindings = <&mo>, <&kp>;
+        };
+        lt_nav: layer_tap_nav {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
+            bindings = <&mo>, <&kp>;
+        };
+        lt_num: layer_tap_num {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
+            bindings = <&mo>, <&kp>;
+        };
+
         // Layer-tap with sticky key for i3 workspace switching
         fun_sk: fun_layer_sticky {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            flavor = "tap-preferred";
+            quick-tap-ms = <200>;
+            flavor = "hold-preferred";
+            hold-while-undecided;
             bindings = <&mo>, <&sk>;
         };
 
@@ -131,7 +164,7 @@
    &kp GRAVE  &kp Q  &kp W       &kp E       &kp R        &kp T          &kp Y      &kp U        &kp I       &kp O       &kp P     &kp MINUS
    &kp SQT    &kp A  &hm LALT S  &hm LGUI D  &hm LCTRL F  &kp G          &kp H      &hm RCTRL J  &hm RGUI K  &hm RALT L  &kp SEMI  &kp EQUAL
    &tmux      &kp Z  &kp X       &kp C       &kp V        &kp B          &kp N      &kp M        &kp COMMA   &kp DOT     &kp FSLH  &kp BSLH
-                                 &lt MOUSE ESC &ts LSHFT BSPC &lt NAV TAB   &lt NUM RET &ts RSHFT SPACE &fun_sk FUN LS(LGUI)
+                                 &lt_mouse MOUSE ESC &ts LSHFT BSPC &lt_nav NAV TAB   &lt_num NUM RET &ts RSHFT SPACE &fun_sk FUN LS(LGUI)
             >;
         };
 
