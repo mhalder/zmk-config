@@ -52,16 +52,15 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // Custom layer-taps: hold-preferred + hold-while-undecided
-        // ensures the layer activates immediately, fixing race condition
-        // with fast keypresses after layer activation
+        // Custom layer-taps: balanced flavor queues keypresses while
+        // undecided, then replays them on the resolved layer — fixes the
+        // race condition without the stack overhead of hold-while-undecided
         lt_mouse: layer_tap_mouse {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            flavor = "hold-preferred";
-            hold-while-undecided;
+            flavor = "balanced";
             bindings = <&mo>, <&kp>;
         };
         lt_nav: layer_tap_nav {
@@ -69,8 +68,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            flavor = "hold-preferred";
-            hold-while-undecided;
+            flavor = "balanced";
             bindings = <&mo>, <&kp>;
         };
         lt_num: layer_tap_num {
@@ -78,8 +76,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            flavor = "hold-preferred";
-            hold-while-undecided;
+            flavor = "balanced";
             bindings = <&mo>, <&kp>;
         };
 
@@ -89,8 +86,7 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             quick-tap-ms = <200>;
-            flavor = "hold-preferred";
-            hold-while-undecided;
+            flavor = "balanced";
             bindings = <&mo>, <&sk>;
         };
 
